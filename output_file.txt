@@ -1,0 +1,1 @@
+<_io.TextIOWrapper name='c:\\Users\\Nouri\\Desktop\\rides_test\\test_files\\1.gpx' mode='r' encoding='cp1252'><_io.TextIOWrapper name='c:\\Users\\Nouri\\Desktop\\rides_test\\test_files\\2.gpx' mode='r' encoding='cp1252'><_io.TextIOWrapper name='c:\\Users\\Nouri\\Desktop\\rides_test\\test_files\\3.gpx' mode='r' encoding='cp1252'>

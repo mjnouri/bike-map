@@ -32,6 +32,11 @@ for file in os.listdir(dir):
 		for i in lines[start_line_number:end_line_number]:
 			output_file.write(i)
 		output_file.write("\n\n")
+		# next step - geolocate first lat/lon point of each .gpx file to get name of trail
+			# in a map variable, store each trail name and starting point coordinate
+			# store first coordinate in .gpx file to variable
+			# if variable coordinate is within 1000' from any starting point in the map variable
+			# output matching trail name from map to csv file column
 
 # add the closing element to rides.gpx
 output_file.write("</gpx>")

@@ -11,11 +11,25 @@ open('rides.gpx', 'w').close()
 # the file being constructed, which will contain <trk> elements from all .gpx files in gpx_files\
 output_file = open('rides.gpx', 'a')
 first_file = True
+ride_count = 0
 
 # dictionary of starting coordinates at each trailhead where keys = str, values = tuples, each tuple has 2 floats
 trailhead_coordinates = {'Haverstraw Trail':  (41.182578, -73.951956),
+        				 'Columbia Trail':    (40.817641, -74.724419),
         				 'Paulinskill Trail': (41.085281, -74.699790),
-        				 'Columbia Trail':    (40.817641, -74.724419)}
+						 'Paulinskill Trail2': (40.992136, -74.910228),
+						 'Lincoln Park Trail': (40.919203, -74.300907),
+						 'Highlands Trail': (40.401271, -73.984361),
+						 'Cedar Grove Trail': (40.858259, -74.226300),
+						 'Battlefield Trail': (40.523669, -74.492918),
+						 'Carol Place Trail': (40.936060, -74.226020),
+						 'Bluffton Trail': (32.252757, -80.924594),
+						 'Hilton Head Trail': (32.142620, -80.753349),
+						 'Mountainside Trail': (40.971169, -74.325388),
+						 'Franklin Lakes Trail': (40.990281, -74.197101),
+						 'Monksville Reservoir': (41.136845, -74.306884),
+						 'Sterling Forest Trail': (41.206681, -74.239067),
+						 'Cannonball Trail': (41.047944, -74.251842)}
 
 #  perform the following actions for each .gpx file in gpx_files\
 for file in os.listdir(dir):
@@ -55,12 +69,14 @@ for file in os.listdir(dir):
 		# loop through trailhead coordinates and look for where the current gpx file starting point is closest to
 		for trail_name, trail_coordinates in trailhead_coordinates.items():
 			difference_in_distance = hs.haversine(file_starting_coordinate,trail_coordinates,unit=Unit.FEET)
-			if difference_in_distance < 500:
+			if difference_in_distance < 1000:
 				print("Trail found in gpx file is " + trail_name)
 				print(f"First gpx coordinate is " + str(int(difference_in_distance)) + " feet away from " + trail_name + " trailhead.")
+				ride_count += 1
 				print()
 		gpx_file.close()
 
 # add the closing element to rides.gpx
 output_file.write("</gpx>")
 output_file.close()
+print(ride_count)

@@ -3,6 +3,7 @@ import haversine as hs
 from haversine import Unit
 import gpxpy
 import subprocess
+import re
 
 dir = "gpx_files\\"
 start_pattern = "<trk>"
@@ -10,9 +11,10 @@ end_pattern = "</trk>"
 # create rides.gpx if it doesn't exist, clear contents if it does
 open('rides.gpx', 'w').close()
 # the file being constructed, which will contain <trk> elements from all .gpx files in gpx_files\
-output_file = open('rides.gpx', 'a')
+output_file = open('rides.gpx', 'w')
 first_file = True
 ride_count = 0
+total_miles = 0.0
 
 # dictionary of starting coordinates at each trailhead where keys = str, values = tuples, each tuple has 2 floats
 trailhead_coordinates = {
@@ -37,9 +39,9 @@ trailhead_coordinates = {
 for file in os.listdir(dir):
 	if file.endswith(".gpx"):
 		current_file_path = dir + file
+
 		current_file = open(current_file_path, "r")
 		lines = current_file.readlines()
-
 		# when building rides.gpx, add the opening elements from the first file
 		if (first_file):
 			for i in lines[:8]:
@@ -53,7 +55,7 @@ for file in os.listdir(dir):
 				start_line_number = index
 			if end_pattern in line_value:
 				end_line_number = index + 1
-		print("File: {0}\nStart line: {1}\nEnd line: {2}".format(current_file_path, start_line_number, end_line_number))
+		# print("File: {0}\nStart line: {1}\nEnd line: {2}".format(current_file_path, start_line_number, end_line_number))
 
 		# add the contents between <trk> and </trk> from each file to rides.gpx
 		for i in lines[start_line_number:end_line_number]:
@@ -72,23 +74,39 @@ for file in os.listdir(dir):
 		for trail_name, trail_coordinates in trailhead_coordinates.items():
 			difference_in_distance = hs.haversine(file_starting_coordinate,trail_coordinates,unit=Unit.FEET)
 			if difference_in_distance < 500:
-				print("Trail found in .gpx file is " + trail_name + ".")
+				# print("Trail found in .gpx file is " + trail_name + ".")
 				# print("Trail found in gpx file is {0}."format(trail_name))
-				print("First gpx coordinate is " + str(int(difference_in_distance)) + " feet away from " + trail_name + " trailhead.")
+				# print("First gpx coordinate is " + str(int(difference_in_distance)) + " feet away from " + trail_name + " trailhead.")
 				# print("First gpx coordinate is {0} feet away from {1} trailhead."format(difference_in_distance, trail_name))
 				ride_count += 1
-				print("Ride count: " + str(ride_count))
+				# print("Ride number: " + str(ride_count))
+				# export trail_name for later use for adding trail name to gpx file <name> element
+				current_trail_name = trail_name
 		gpx_file.close()
+
+		# edit gpx file <name> to be this format: <name><![CDATA[Lincoln Park Trail - 21.92 miles - Cycling 2-26-21]]></name>
+		print(current_trail_name)
+		# try:
+		# 	lines = output_file.readlines()
+		# except:
+		# 	print()
+		# print(lines[9])
 
 		# get distance traveled in miles from gpx file using gpx-cmd-tools
 		cmd = "python ..\gpx-cmd-tools\gpxinfo {0} --track --miles".format(current_file_path)
 		cmd_output = subprocess.check_output(cmd)
 		decoded_output = cmd_output.decode("utf-8")
-		print(decoded_output)
-
-		# edit gpx file <name> to be this format: <name><![CDATA[Lincoln Park Trail - 21.92 miles - Cycling 2-26-21]]></name>
+		# print(decoded_output)
+		listmilesline = re.findall('Length 3D.*miles', decoded_output) # return only the line with the amount of miles in it
+		strmilesline = listmilesline[0] # convert list item to a str
+		strmiles = strmilesline[11:16] # get just the number of miles in xx.xx format
+		floatmiles = float(strmiles) # convert str to float
+		# roundedfloatmiles = round(floatmiles, 4)
+		print(floatmiles)
+		total_miles = total_miles + floatmiles
+		print(total_miles)
 
 # add the closing element to rides.gpx
 output_file.write("</gpx>")
 output_file.close()
-print("Total rides: " + str(ride_count))
+# print("Total rides: " + str(ride_count))

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx
+  version="1.1"
+  creator="Runkeeper - http://www.runkeeper.com"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.topografix.com/GPX/1/1"
+  xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"
+  xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1">
+<trk>
+  <name><![CDATA[Cycling 9/13/22 6:39 pm]]></name>
+  <time>2022-09-13T22:39:38Z</time>
+<trkseg>
+<trkpt lat="40.919353000" lon="-74.300780000"><ele>54.7</ele><time>2022-09-13T22:39:38Z</time></trkpt>
+<trkpt lat="40.919350000" lon="-74.300705000"><ele>54.6</ele><time>2022-09-13T22:39:41Z</time></trkpt>
+<trkpt lat="40.919247000" lon="-74.300510000"><ele>54.6</ele><time>2022-09-13T22:39:49Z</time></trkpt>
+<trkpt lat="40.919147000" lon="-74.300290000"><ele>54.7</ele><time>2022-09-13T22:39:58Z</time></trkpt>
+<trkpt lat="40.919025000" lon="-74.300080000"><ele>54.7</ele><time>2022-09-13T22:40:06Z</time></trkpt>
+<trkpt lat="40.919010000" lon="-74.300026000"><ele>54.7</ele><time>2022-09-13T22:40:08Z</time></trkpt>
+<trkpt lat="40.919040000" lon="-74.300050000"><ele>54.7</ele><time>2022-09-13T22:40:13Z</time></trkpt>
+<trkpt lat="40.919132000" lon="-74.300285000"><ele>54.7</ele><time>2022-09-13T22:40:23Z</time></trkpt>
+<trkpt lat="40.919205000" lon="-74.300510000"><ele>54.7</ele><time>2022-09-13T22:40:34Z</time></trkpt>
+<trkpt lat="40.919290000" lon="-74.300730000"><ele>54.7</ele><time>2022-09-13T22:40:44Z</time></trkpt>
+<trkpt lat="40.919384000" lon="-74.300930000"><ele>54.8</ele><time>2022-09-13T22:40:56Z</time></trkpt>
+<trkpt lat="40.919487000" lon="-74.301140000"><ele>54.9</ele><time>2022-09-13T22:41:06Z</time></trkpt>
+<trkpt lat="40.919590000" lon="-74.301346000"><ele>55.0</ele><time>2022-09-13T22:41:20Z</time></trkpt>
+<trkpt lat="40.919690000" lon="-74.301575000"><ele>55.0</ele><time>2022-09-13T22:41:29Z</time></trkpt>
+<trkpt lat="40.919800000" lon="-74.301780000"><ele>55.0</ele><time>2022-09-13T22:41:37Z</time></trkpt>
+<trkpt lat="40.919834000" lon="-74.301820000"><ele>55.0</ele><time>2022-09-13T22:41:39Z</time></trkpt>
+<trkpt lat="40.919743000" lon="-74.301796000"><ele>55.0</ele><time>2022-09-13T22:41:46Z</time></trkpt>
+<trkpt lat="40.919680000" lon="-74.301570000"><ele>55.0</ele><time>2022-09-13T22:41:59Z</time></trkpt>
+<trkpt lat="40.919605000" lon="-74.301340000"><ele>55.0</ele><time>2022-09-13T22:42:11Z</time></trkpt>
+<trkpt lat="40.919550000" lon="-74.301094000"><ele>55.0</ele><time>2022-09-13T22:42:18Z</time></trkpt>
+<trkpt lat="40.919437000" lon="-74.300890000"><ele>55.0</ele><time>2022-09-13T22:42:24Z</time></trkpt>
+<trkpt lat="40.919296000" lon="-74.300896000"><ele>55.0</ele><time>2022-09-13T22:42:29Z</time></trkpt>
+<trkpt lat="40.919285000" lon="-74.300930000"><ele>55.0</ele><time>2022-09-13T22:42:33Z</time></trkpt>
+</trkseg>
+</trk>
+</gpx>

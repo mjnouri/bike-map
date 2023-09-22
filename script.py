@@ -5,7 +5,7 @@ import gpxpy
 import subprocess
 import re
 
-dir = "gpx_files\\"
+dir = "gpx_files_sample\\"
 start_pattern = "<trk>"
 end_pattern = "</trk>"
 # create rides.gpx if it doesn't exist, clear contents if it does
@@ -102,11 +102,15 @@ for file in os.listdir(dir):
 		strmiles = strmilesline[11:16] # get just the number of miles in xx.xx format
 		floatmiles = float(strmiles) # convert str to float
 		# roundedfloatmiles = round(floatmiles, 4)
-		print(floatmiles)
+		print("Miles: {0}".format(floatmiles))
+		print()
 		total_miles = total_miles + floatmiles
-		print(total_miles)
+		# print(total_miles)
 
 # add the closing element to rides.gpx
 output_file.write("</gpx>")
 output_file.close()
-# print("Total rides: " + str(ride_count))
+
+print("--------------------")
+print("Total rides: " + str(ride_count))
+print("Total miles: {0}".format(total_miles))

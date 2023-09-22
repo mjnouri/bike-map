@@ -4,6 +4,7 @@ from haversine import Unit
 import gpxpy
 import subprocess
 import re
+import csv
 
 dir = "gpx_files_sample\\"
 start_pattern = "<trk>"
@@ -15,6 +16,10 @@ output_file = open('rides.gpx', 'w')
 first_file = True
 ride_count = 0
 total_miles = 0.0
+current_trail_name_list = []
+floatmiles_list = []
+# create all_rides.csv if it doesn't exist, clear contents if it does
+open('all_rides.csv', 'w').close()
 
 # dictionary of starting coordinates at each trailhead where keys = str, values = tuples, each tuple has 2 floats
 trailhead_coordinates = {
@@ -92,6 +97,9 @@ for file in os.listdir(dir):
 		# 	print()
 		# print(lines[9])
 
+		# add each current_trail_name (iteration) to a list (current_trail_name_list) for adding to csv later
+		current_trail_name_list.append(current_trail_name)
+
 		# get distance traveled in miles from gpx file using gpx-cmd-tools
 		cmd = "python ..\gpx-cmd-tools\gpxinfo {0} --track --miles".format(current_file_path)
 		cmd_output = subprocess.check_output(cmd)
@@ -107,10 +115,22 @@ for file in os.listdir(dir):
 		total_miles = total_miles + floatmiles
 		# print(total_miles)
 
+		# add each floatmiles amount (iteration) to a list (floatmiles_list) for adding to csv later
+		floatmiles_list.append(floatmiles)
+
+# create csv file of all rides
+print (current_trail_name_list)
+print()
+print("Generating CSV file...")
+for ride in current_trail_name_list:
+	with open('all_rides.csv', mode='a') as all_rides:
+		csv_writer = csv.writer(all_rides, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+		csv_writer.writerow([ride, floatmiles])
+
 # add the closing element to rides.gpx
 output_file.write("</gpx>")
 output_file.close()
 
-print("--------------------")
-print("Total rides: " + str(ride_count))
-print("Total miles: {0}".format(total_miles))
+# print("--------------------")
+# print("Total rides: " + str(ride_count))
+# print("Total miles: {0}".format(total_miles))

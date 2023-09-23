@@ -7,6 +7,7 @@ import re
 import csv
 
 dir = "gpx_files_sample\\"
+# dir = "gpx_files\\"
 start_pattern = "<trk>"
 end_pattern = "</trk>"
 # create rides.gpx if it doesn't exist, clear contents if it does
@@ -119,18 +120,21 @@ for file in os.listdir(dir):
 		floatmiles_list.append(floatmiles)
 
 # create csv file of all rides
-print (current_trail_name_list)
+# print(floatmiles_list)
+# print (current_trail_name_list)
 print()
 print("Generating CSV file...")
-for ride in current_trail_name_list:
+for (ride, floatmile_count) in zip(current_trail_name_list, floatmiles_list):
 	with open('all_rides.csv', mode='a') as all_rides:
 		csv_writer = csv.writer(all_rides, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-		csv_writer.writerow([ride, floatmiles])
+		csv_writer.writerow([ride, floatmile_count])
 
 # add the closing element to rides.gpx
 output_file.write("</gpx>")
 output_file.close()
 
-# print("--------------------")
-# print("Total rides: " + str(ride_count))
-# print("Total miles: {0}".format(total_miles))
+print("Done.")
+print()
+print("--------------------")
+print("Total rides: " + str(ride_count))
+print("Total miles: {0}".format(total_miles))

@@ -1,3 +1,14 @@
+# this script accepts *.gpx files as input, and generates "rides.gpx" of all the <trk>'s in all files, 
+# and creates an "all_rides.csv" file of trail names and miles.
+
+# print beginning of first input .gpx file to output file rides.gpx.
+# find where <trk> and </trk> are in each .gpx file
+# append what's between <trk> and </trk> from each file to rides.gpx
+# get first coordinate from gpx file
+# find closest distance between first coordinate in gpx file and starting trail locations
+# get miles traveled from gpx file
+# write trail name,miles to "all_rides.csv"
+
 import os
 import haversine as hs
 from haversine import Unit
@@ -18,7 +29,7 @@ first_file = True
 ride_count = 0
 total_miles = 0.0
 current_trail_name_list = []
-floatmiles_list = []
+miles_list = []
 # create all_rides.csv if it doesn't exist, clear contents if it does
 open('all_rides.csv', 'w').close()
 
@@ -109,22 +120,22 @@ for file in os.listdir(dir):
 		listmilesline = re.findall('Length 3D.*miles', decoded_output) # return only the line with the amount of miles in it
 		strmilesline = listmilesline[0] # convert list item to a str
 		strmiles = strmilesline[11:16] # get just the number of miles in xx.xx format
-		floatmiles = float(strmiles) # convert str to float
-		# roundedfloatmiles = round(floatmiles, 4)
-		print("Miles: {0}".format(floatmiles))
+		miles = float(strmiles) # convert str to float
+		# roundedmiles = round(miles, 4)
+		print("Miles: {0}".format(miles))
 		print()
-		total_miles = total_miles + floatmiles
+		total_miles += miles
 		# print(total_miles)
 
-		# add each floatmiles amount (iteration) to a list (floatmiles_list) for adding to csv later
-		floatmiles_list.append(floatmiles)
+		# add each miles amount (iteration) to a list (miles_list) for adding to csv later
+		miles_list.append(miles)
 
 # create csv file of all rides
-# print(floatmiles_list)
-# print (current_trail_name_list)
+# print(current_trail_name_list)
+# print(miles_list)
 print()
 print("Generating CSV file...")
-for (ride, floatmile_count) in zip(current_trail_name_list, floatmiles_list):
+for (ride, floatmile_count) in zip(current_trail_name_list, miles_list):
 	with open('all_rides.csv', mode='a') as all_rides:
 		csv_writer = csv.writer(all_rides, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 		csv_writer.writerow([ride, floatmile_count])
